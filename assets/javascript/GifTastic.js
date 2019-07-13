@@ -6,11 +6,10 @@ $(document).ready(function () {
         for (var i = 0; i < gifs.length; i++) {
             var newGif = $("<button>");
             newGif.addClass("gif-btn");
-            newGif.attr("data-gif", gifs[i]);
+            newGif.attr("data-info", gifs[i]);
             newGif.text(gifs[i]);
             newGif.addClass("btn");
             $("#buttons-view").append(newGif);
-            
             console.log(newGif);
         }
     }
