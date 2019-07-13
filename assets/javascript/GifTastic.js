@@ -1,13 +1,13 @@
 $(document).ready(function () {
-    var gifs = ["family guy", "the office", "parks and rec"];
+    var topics = ["family guy", "the office", "parks and rec"];
 
     function renderButton() {
         $("#buttons-view").empty();
-        for (var i = 0; i < gifs.length; i++) {
+        for (var i = 0; i < topics.length; i++) {
             var newGif = $("<button>");
             newGif.addClass("gif-btn");
-            newGif.attr("data-info", gifs[i]);
-            newGif.text(gifs[i]);
+            newGif.attr("data-info", topics[i]);
+            newGif.text(topics[i]);
             newGif.addClass("btn");
             $("#buttons-view").append(newGif);
             console.log(newGif);
@@ -18,7 +18,7 @@ $(document).ready(function () {
         console.log(event);
         event.preventDefault();
         var gif = $("#gif-input").val().trim();
-        gifs.push(gif);
+        topics.push(gif);
         renderButton();
     });
 
