@@ -6,7 +6,7 @@ $(document).ready(function () {
         for (var i = 0; i < gifs.length; i++) {
             var newGif = $("<button>");
             newGif.addClass("gif-btn");
-            newGif.attr("data-gif", gifs[i]);
+            newGif.attr("data-info", gifs[i]);
             newGif.text(gifs[i]);
             newGif.addClass("btn");
             $("#buttons-view").append(newGif);
@@ -15,36 +15,37 @@ $(document).ready(function () {
     }
 
     $("#add-gif").on("click", function (event) {
+        console.log(event);
         event.preventDefault();
         var gif = $("#gif-input").val().trim();
         gifs.push(gif);
-    })
+        renderButton();
+    });
+
     renderButton();
-
-
-    $(document).on("click", "button", function() {
-        var gif = $(this).attr("data-gif")
-        var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=NDDGg93an2SN1k7cICHE2VEWVhPV62X9&q=&limit=25&offset=0&rating=G&lang=en" + searchTerm + "&api-key=NDDGg93an2SN1k7cICHE2VEWVhPV62X9";
+    $(document).on("click", "button", function () {
+        var gif = $(this).attr("data-info")
+        var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=NDDGg93an2SN1k7cICHE2VEWVhPV62X9&q=&limit=25&offset=0&rating=G&lang=en" + gif + "&api-key=NDDGg93an2SN1k7cICHE2VEWVhPV62X9&limit=10";
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            var gifDisplay = response.data;
-            for (var j = 0; j < gifs.length; i++) {
+            console.log(response);
+            var results = response.data;
+            for (var j = 0; j < results.length; j++) {
                 var gifsDiv = $("<div>");
-                var p = $("<p>").text("gifsDiv" + gifsDiv);
+                var rating = results[j].rating;
+                var p = $("<p>").text("Rating" + rating);
                 var gifImage = $("<img>");
-                gifImage.attr("src", results[i].images.fixed_height.url);
-                
-                var newGif = ["gif1", "gif2"]
-                gifImage.addClass(newGif[i]);
+                gifImage.attr("src", results[j].images.fixed_height.url);
+
+                var gifName = ["gif1", "gif2",]
+                gifImage.addClass(gifName[j]);
 
                 gifsDiv.prepend(p);
                 gifsDiv.prepend(gifImage);
-                $("#gifs-appear-here").prepend(gifsDiv)l
-
+                $("#gifs-appear-here").prepend(gifsDiv);
             }
         })
-
-
-});
+    });
+})
