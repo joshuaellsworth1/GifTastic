@@ -25,8 +25,8 @@ $(document).ready(function () {
     renderButton();
     //Can't get the gifs to generate based on the value of the buttons.
     $(document).on("click", "button", function () {
-        var gif = $(this).attr("buttons-view")
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + gif + "&api-key=NDDGg93an2SN1k7cICHE2VEWVhPV62X9&limit=10";
+        var gif = $(this).attr("data-info")
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + gif + "&api_key=NDDGg93an2SN1k7cICHE2VEWVhPV62X9&limit=10";
         $.ajax({
             url: queryURL,
             method: "GET"
